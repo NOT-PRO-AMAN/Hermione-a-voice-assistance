@@ -3,6 +3,8 @@ import webbrowser
 import pyttsx3
 import playlist
 import translation
+import pyjokes
+
 
 ttsx = pyttsx3.init()
 r = sr.Recognizer()
@@ -14,6 +16,20 @@ def speak(text):
     ttsx.setProperty('voice', voices[1].id)
     ttsx.say(text)
     ttsx.runAndWait()
+
+def speak_joke(text):   #i am creating this function because jokes are more funier when speaked slowly amd also wanna change voice
+    ttsx.setProperty('rate', 110)     
+    voices = ttsx.getProperty('voices')
+    ttsx.setProperty('voice', voices[0].id)
+    ttsx.say(text)
+    ttsx.runAndWait()
+      
+
+
+def funny_jokes():
+    jk = pyjokes.get_joke()
+    print(f"ඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ\n\n{jk}\n\nඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞඞ")
+    speak_joke(jk)
 
 
 def kaam(k):
@@ -47,7 +63,8 @@ def kaam(k):
             audio = r.listen(source)
             engtext = r.recognize_google(audio)
             translation.speak_print(engtext)
-
+    elif "joke" in k.lower() or "jokes" in k.lower():
+        funny_jokes()
 
 
 
